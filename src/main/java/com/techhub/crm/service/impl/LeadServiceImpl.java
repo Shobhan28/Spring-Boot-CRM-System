@@ -42,6 +42,11 @@ public class LeadServiceImpl implements LeadService {
         return dto;
     }
 
+    @Override
+    public void deleteLeadById(String lid) {
+        leadRepo.deleteById(lid);
+    }
+
     Lead mapToEntity(LeadDto leadDto) {
         Lead lead = modelMapper.map(leadDto, Lead.class);
 
