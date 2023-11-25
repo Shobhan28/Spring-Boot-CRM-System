@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -44,8 +45,12 @@ public class LeadServiceImpl implements LeadService {
 
     @Override
     public void deleteLeadById(String lid) {
+        Lead lead = leadRepo.findById(lid).orElseThrow(
+                ()-> new LeadExist("Lead with this id is not present-" + lid)
+        );
         leadRepo.deleteById(lid);
     }
+
 
     Lead mapToEntity(LeadDto leadDto) {
         Lead lead = modelMapper.map(leadDto, Lead.class);
