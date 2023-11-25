@@ -14,6 +14,6 @@ public interface LeadRepository extends JpaRepository <Lead, String> {
 
     boolean existsByEmail(String email);
 
-    boolean existsByMobile(String mobile);
+    boolean existsByMobile(long mobile);
 
 }
