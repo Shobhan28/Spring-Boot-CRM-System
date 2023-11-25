@@ -6,10 +6,7 @@ import com.techhub.crm.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/leads")
@@ -26,4 +23,11 @@ public class LeadController {
     return new ResponseEntity<>(leadDto1, HttpStatus.CREATED);
     }
 
+
+    @DeleteMapping("/{lid}")
+    public ResponseEntity<String> deleteLeadById(@PathVariable String lid){
+        leadService.deleteLeadById(lid);
+        return new ResponseEntity<>("Lead is deleted", HttpStatus.OK);
+
+    }
 }
