@@ -9,4 +9,5 @@ public interface LeadService {
 
     LeadDto createLead(LeadDto leadDto);
 
+    void deleteLeadById(String lid);
 }
