@@ -1,6 +1,7 @@
 package com.techhub.crm.controller;
 
 
+import com.techhub.crm.payload.EmailDto;
 import com.techhub.crm.payload.LeadDto;
 import com.techhub.crm.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,15 @@ public class LeadController {
 
     //  http://localhost:8080/api/leads
     @PostMapping
-    public ResponseEntity <LeadDto> createLead(@RequestBody LeadDto leadDto){
+    public ResponseEntity<LeadDto> createLead(@RequestBody LeadDto leadDto) {
         // this data will go to service layer
-    LeadDto leadDto1 = leadService.createLead(leadDto);
-    return new ResponseEntity<>(leadDto1, HttpStatus.CREATED);
+        LeadDto leadDto1 = leadService.createLead(leadDto);
+        return new ResponseEntity<>(leadDto1, HttpStatus.CREATED);
     }
 
 
     @DeleteMapping("/{lid}")
-    public ResponseEntity<String> deleteLeadById(@PathVariable String lid){
+    public ResponseEntity<String> deleteLeadById(@PathVariable String lid) {
         leadService.deleteLeadById(lid);
         return new ResponseEntity<>("Lead is deleted", HttpStatus.OK);
 
