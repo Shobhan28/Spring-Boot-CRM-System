@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/leads")
 public class LeadController {
@@ -29,5 +31,11 @@ public class LeadController {
         leadService.deleteLeadById(lid);
         return new ResponseEntity<>("Lead is deleted", HttpStatus.OK);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LeadDto>> getAllLeads() {
+        List<LeadDto> listleads = leadService.getAllLeads();
+        return ResponseEntity.status(HttpStatus.OK).body(listleads);
     }
 }
