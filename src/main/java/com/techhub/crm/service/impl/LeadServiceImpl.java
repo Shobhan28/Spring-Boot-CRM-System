@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class LeadServiceImpl implements LeadService {
@@ -51,6 +52,12 @@ public class LeadServiceImpl implements LeadService {
         leadRepo.deleteById(lid);
     }
 
+    @Override
+    public List<LeadDto> getAllLeads() {
+        List<Lead> allLeads = leadRepo.findAll();
+        List<LeadDto> allLeadDto = allLeads.stream().map(leads -> mapToDto(leads)).collect(Collectors.toList());
+        return allLeadDto;
+    }
 
     Lead mapToEntity(LeadDto leadDto) {
         Lead lead = modelMapper.map(leadDto, Lead.class);
