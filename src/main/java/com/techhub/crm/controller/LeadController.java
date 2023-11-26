@@ -1,22 +1,29 @@
 package com.techhub.crm.controller;
 
-
-import com.techhub.crm.payload.EmailDto;
 import com.techhub.crm.payload.LeadDto;
+import com.techhub.crm.service.ExcelService;
 import com.techhub.crm.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.core.io.Resource;
 
 import java.util.List;
+import java.util.Objects;
 
+@CrossOrigin("http://localhost:8080")
 @RestController
 @RequestMapping("/api/leads")
 public class LeadController {
 
     @Autowired
     private LeadService leadService;
+    @Autowired
+    private ExcelService excelService;
 
     //  http://localhost:8080/api/leads
     @PostMapping
@@ -25,7 +32,6 @@ public class LeadController {
         LeadDto leadDto1 = leadService.createLead(leadDto);
         return new ResponseEntity<>(leadDto1, HttpStatus.CREATED);
     }
-
 
     @DeleteMapping("/{lid}")
     public ResponseEntity<String> deleteLeadById(@PathVariable String lid) {
@@ -39,4 +45,12 @@ public class LeadController {
         List<LeadDto> listleads = leadService.getAllLeads();
         return ResponseEntity.status(HttpStatus.OK).body(listleads);
     }
+
+    @GetMapping("/get/{lid}")
+    public ResponseEntity<LeadDto> findByLeadid(@PathVariable("lid") String lid) {
+        LeadDto Dto = leadService.findByLeadid(lid);
+        return ResponseEntity.status(HttpStatus.OK).body(Dto);
+    }
+
+
 }
