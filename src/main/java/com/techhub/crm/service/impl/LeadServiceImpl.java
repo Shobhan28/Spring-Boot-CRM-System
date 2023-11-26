@@ -28,16 +28,16 @@ public class LeadServiceImpl implements LeadService {
         boolean mobileExists = leadRepo.existsByMobile(leadDto.getMobile());
 
         if (emailExists) {
-            throw new LeadExist("Email id Exists-" + leadDto.getEmail());
+            throw new LeadExist("Email ID " + leadDto.getEmail() + " already exists.");
         }
         if (mobileExists) {
-            throw new LeadExist("Mobile no. Exixts-" + leadDto.getMobile());
+            throw new LeadExist("Mobile no." + leadDto.getMobile() + "already exists.");
         }
 
         Lead lead = mapToEntity(leadDto);
         // setting up automatic random id generate
         String leadid = UUID.randomUUID().toString();
-        lead.setLid(leadid);
+        lead.setLeadId(leadid);
 
         Lead savedLead = leadRepo.save(lead);
         LeadDto dto = mapToDto(savedLead);
@@ -45,11 +45,11 @@ public class LeadServiceImpl implements LeadService {
     }
 
     @Override
-    public void deleteLeadById(String lid) {
-        Lead lead = leadRepo.findById(lid).orElseThrow(
-                ()-> new LeadExist("Lead with this id is not present-" + lid)
+    public void deleteLeadById(String leadId) {
+        Lead lead = leadRepo.findById(leadId).orElseThrow(
+                ()-> new LeadExist("Lead with the id " + leadId + " is not present")
         );
-        leadRepo.deleteById(lid);
+        leadRepo.deleteById(leadId);
     }
 
     @Override
