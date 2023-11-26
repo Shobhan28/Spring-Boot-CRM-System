@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Email {
 
     @Id
-    private String eid;
+    private String emailId;
     @Column(name = "from_email")
     private String from;
     @Column(name = "to_email")
