@@ -52,5 +52,20 @@ public class LeadController {
         return ResponseEntity.status(HttpStatus.OK).body(Dto);
     }
 
+    //  http://localhost:8080/api/leads/excelReports
+    @GetMapping("/excelReports")
+    public ResponseEntity<Resource> getAllLeadsExcelReports() {
 
+        String filename = "leads.xlsx";
+        InputStreamResource file = new InputStreamResource(excelService.load());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+        headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(file);
+
+    }
 }
