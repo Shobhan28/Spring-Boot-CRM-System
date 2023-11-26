@@ -16,36 +16,36 @@ import javax.validation.constraints.Size;
 public class Lead {
 
     @Id
-    private String lid;
+    private String leadId; // Lead ID in Zoho CRM
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "First_Name", nullable = false)
     @Size(max = 20)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "Last_Name", nullable = false)
     @Size(max = 20)
     private String lastName;
 
     @Email
+    @Column(name = "Email", nullable = false)
     private String email;
 
-    @Column(name = "mobile", nullable = false,unique = true)
+    @Column(name = "PhoneNo.", nullable = false, unique = true)
     private long mobile;
 
-    @Column(name = "lead_type", nullable = false)
-    private String leadType;
-
     @Size(max = 100)
+    @Column(name = "Address")
     private String address;
 
-    @Size(max = 50)
-    private String designation;
-
-    @Size(max = 50)
-    private String company;
+    @Size(max = 100)
+    @Column(name = "Company_Name")
+    private String companyName;
 
     @Lob
-    private String note;
+    @Column(name = "Description")
+    private String description; // Description/note field in Zoho CRM
 
+    @Column(name = "Status")
+    private String leadStatus; // Current status of the lead (e.g., New, Contacted, Qualified, etc.)
 
 }
