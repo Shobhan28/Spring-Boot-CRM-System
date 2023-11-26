@@ -4,6 +4,7 @@ import com.techhub.crm.entity.Email;
 import com.techhub.crm.entity.Lead;
 import com.techhub.crm.exception.LeadExist;
 import com.techhub.crm.payload.EmailDto;
+import com.techhub.crm.repository.ContactRepository;
 import com.techhub.crm.repository.EmailRepository;
 import com.techhub.crm.repository.LeadRepository;
 import com.techhub.crm.service.EmailService;
@@ -19,17 +20,21 @@ import java.util.UUID;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
+
     private JavaMailSender javaMailSender;
-    @Autowired
     private ModelMapper modelMapper;
-
-    private EmailRepository emailRepo;
     private LeadRepository leadRepo;
+    private EmailRepository emailRepo;
+    private ContactRepository contactRepo;
 
-    public EmailServiceImpl(EmailRepository emailRepo, LeadRepository leadRepo) {
-        this.emailRepo = emailRepo;
+    public EmailServiceImpl(JavaMailSender javaMailSender, ModelMapper modelMapper,
+                            LeadRepository leadRepo, EmailRepository emailRepo,
+                            ContactRepository contactRepo) {
+        this.javaMailSender = javaMailSender;
+        this.modelMapper = modelMapper;
         this.leadRepo = leadRepo;
+        this.emailRepo = emailRepo;
+        this.contactRepo = contactRepo;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class EmailServiceImpl implements EmailService {
 
         Email email = mapToEntity(emailDto);
         String emailid = UUID.randomUUID().toString();
-        email.setEid(emailid);
+        email.setEmailId(emailid);
 
         Email sentEmail = emailRepo.save(email);
         return mapToDto(sentEmail);
