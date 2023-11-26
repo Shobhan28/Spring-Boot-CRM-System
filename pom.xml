@@ -8,11 +8,11 @@
 		<version>2.7.17</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.crm</groupId>
-	<artifactId>crm</artifactId>
+	<groupId>com.techhub.crm</groupId>
+	<artifactId>CRMSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crm</name>
-	<description>sample crm project</description>
+	<name>TechHubCRM</name>
+	<description>An innovative Spring Boot project exemplifying modern solutions for Customer Relationship Management (CRM).</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
