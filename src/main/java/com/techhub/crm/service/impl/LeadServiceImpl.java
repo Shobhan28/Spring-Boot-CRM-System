@@ -47,7 +47,7 @@ public class LeadServiceImpl implements LeadService {
     @Override
     public void deleteLeadById(String leadId) {
         Lead lead = leadRepo.findById(leadId).orElseThrow(
-                ()-> new LeadExist("Lead with the id " + leadId + " is not present")
+                () -> new LeadExist("Lead with the id " + leadId + " is not present")
         );
         leadRepo.deleteById(leadId);
     }
@@ -57,6 +57,18 @@ public class LeadServiceImpl implements LeadService {
         List<Lead> allLeads = leadRepo.findAll();
         List<LeadDto> allLeadDto = allLeads.stream().map(leads -> mapToDto(leads)).collect(Collectors.toList());
         return allLeadDto;
+    }
+
+    @Override
+    public LeadDto findByLeadid(String lid) {
+        Lead lead = leadRepo.findById(lid).orElseThrow(() -> new LeadExist("lead with id : " + lid + " not exist"));
+        return mapToDto(lead);
+
+    }
+
+    @Override
+    public List<Lead> getLeadsExcelReports() {
+        return leadRepo.findAll();
     }
 
     Lead mapToEntity(LeadDto leadDto) {
