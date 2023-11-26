@@ -1,6 +1,7 @@
 package com.techhub.crm.service;
 
 
+import com.techhub.crm.entity.Lead;
 import com.techhub.crm.payload.LeadDto;
 import org.springframework.stereotype.Service;
 
@@ -14,4 +15,8 @@ public interface LeadService {
     void deleteLeadById(String lid);
 
     List<LeadDto> getAllLeads();
+
+    LeadDto findByLeadid(String lid);
+
+    List<Lead> getLeadsExcelReports();
 }
