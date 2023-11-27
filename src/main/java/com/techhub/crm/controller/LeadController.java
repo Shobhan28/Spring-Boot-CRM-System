@@ -1,5 +1,7 @@
 package com.techhub.crm.controller;
 
+import com.techhub.crm.entity.Lead;
+import com.techhub.crm.helper.PDFHelper;
 import com.techhub.crm.payload.LeadDto;
 import com.techhub.crm.service.ExcelService;
 import com.techhub.crm.service.LeadService;
@@ -12,8 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.core.io.Resource;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin("http://localhost:8080")
 @RestController
@@ -66,6 +69,22 @@ public class LeadController {
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(file);
+    }
 
+
+    @GetMapping(value = "/leadPDFReports", produces =
+            MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> leadReport()
+            throws IOException {
+        List<Lead> leads = (List<Lead>) leadService.getLeadsExcelReports();
+
+        ByteArrayInputStream pdfReport = PDFHelper.leadPDFReport(leads);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=leads.pdf");
+
+        return ResponseEntity.ok().headers(headers).contentType
+                        (MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(pdfReport));
     }
 }
