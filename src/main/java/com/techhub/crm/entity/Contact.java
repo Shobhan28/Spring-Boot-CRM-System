@@ -38,11 +38,11 @@ public class Contact {
 
     @Size(max = 50)
     @Column(name = "Company_Name")
-    private String companyName; // Account name in Zoho CRM
+    private String companyName; // Account name in CRM
 
     @Lob
     @Column(name = "Description")
-    private String description; // Description/note field in Zoho CRM
+    private String description; // Description/note field in CRM
 
     @Column(name = "Lead_Source")
     private String leadSource; // Lead source for the contact

@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 public class Lead {
 
     @Id
-    private String leadId; // Lead ID in Zoho CRM
+    private String leadId; // Lead ID in CRM
 
     @Column(name = "First_Name", nullable = false)
     @Size(max = 20)
@@ -43,7 +43,7 @@ public class Lead {
 
     @Lob
     @Column(name = "Description")
-    private String description; // Description/note field in Zoho CRM
+    private String description; // Description/note field in CRM
 
     @Column(name = "Status")
     private String leadStatus; // Current status of the lead (e.g., New, Contacted, Qualified, etc.)
